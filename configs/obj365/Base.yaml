@@ -1,0 +1,28 @@
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+  META_ARCHITECTURE: "OneStageDetector"
+  BACKBONE:
+    NAME: "build_fcos_resnet_fpn_backbone"
+  RESNETS:
+    OUT_FEATURES: ["res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res3", "res4", "res5"]
+  PROPOSAL_GENERATOR:
+    NAME: "FCOS"
+  PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+DATASETS:
+  TRAIN: ("obj365_train",)
+  TEST: ("obj365_val",)
+SOLVER:
+  IMS_PER_BATCH: 4
+  BASE_LR: 0.05  # Note that RetinaNet uses a different default learning rate
+  STEPS: (17376, 23892)
+  MAX_ITER: 26064
+INPUT:
+  # MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MAX_SIZE_TRAIN: 1400
+  MIN_SIZE_TRAIN: (800,)
+  MAX_SIZE_TEST: 1400
+  MIN_SIZE_TEST: (800,)

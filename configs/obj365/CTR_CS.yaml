@@ -1,0 +1,6 @@
+_BASE_: "Base.yaml"
+MODEL:
+  FCOS:
+    THRESH_WITH_CTR: True
+    CENTER_SAMPLE: True
+OUTPUT_DIR: "output/fcos/obj365/CTR_CS"
